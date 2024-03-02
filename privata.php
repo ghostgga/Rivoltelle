@@ -39,7 +39,6 @@ function stampaNota($nota){
       <?php
       echo $nota['titolo'];
       ?>
-
     </h5>
     <div >
       <?php
@@ -85,8 +84,9 @@ function stampaNota($nota){
       <div class="modal-footer">
         <form method="post" 
           <?php echo "action='updateProm.php?id=" . $nota['id'] . "'";?>>
-
-          <input type="text" name="titolo" value=<?php echo $nota['titolo'];?>>
+          <input type="hidden" name="id" value=<?php echo $nota['id'];?>>
+          <input type="hidden" name="titolo" value=<?php echo $nota['titolo'];?>>
+          <input type="hidden" name="testo" value=<?php echo $nota['testo'];?>>
            <button type="submit" class="btn btn-primary" data-bs-target="#exampleModal<?php echo $nota['id']; ?>">Modifica
            </button>
         </form>
