@@ -18,7 +18,9 @@ $query = "SELECT * FROM utenti where nome='$nome' AND password='$password'";
 $result = $mysqli->query($query);
 
 if ($result->num_rows ==1){
+	$row = $result->fetch_assoc();
 	$_SESSION['autenticato']=true;
+	$_SESSION['IdUtente'] = $row["id"];
 	header('Location: index.php');
 
 }

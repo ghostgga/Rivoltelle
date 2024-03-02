@@ -14,42 +14,103 @@ if (!$_SESSION['autenticato'])
 </head>
 <body>
 <h1>I miei promemoria</h1>
-<div class="card" style="width: 18rem;">
+<div>
+  <a href="addProm.php">aggiungi promemoria</a>
+</div>
+
+<div class="allPromemoria">
+<?php
+function stampaNota($nota){
+  if($nota['checkComp']){
+            $checkbox = "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-check-square hidden' viewBox='0 0 16 16'>
+                <path d='M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z'/>
+                <path d='M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z'/>
+            </svg>";
+        }
+        else {
+            $checkbox = "<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-square hidden' viewBox='0 0 16 16'>
+                <path d='M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z'/>
+            </svg>";
+        }
+?>
+<div class="card text-bg-success mb-3" style="width: 18rem;">
   <div class="card-body">
-    <h5 class="card-title">Titolo promemoria</h5>
-    <p class="card-text">Lorem Ipsum è un testo segnaposto utilizzato nel settore della tipografia e della stampa. Lorem Ipsum è considerato il testo segnaposto standard sin dal sedicesimo secolo, quando un anonimo tipografo prese una cassetta di caratteri e li assemblò per preparare un testo campione. È sopravvissuto non solo a più di cinque secoli, ma anche al passaggio alla videoimpaginazione, pervenendoci sostanzialmente inalterato. Fu reso popolare, negli anni ’60, con la diffusione dei fogli di caratteri trasferibili “Letraset”, che contenevano passaggi del Lorem Ipsum, e più recentemente da software di impaginazione come Aldus PageMaker, che includeva versioni del Lorem Ipsum.</p>
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <h5 class="card-title">
+      <?php
+      echo $nota['titolo'];
+      ?>
+
+    </h5>
+    <div class="form-check">
+      <?php
+      echo "<a href='checkComp.php?id=" . $nota['id'] . "'> $checkbox </a>"
+      ?>
+    Completato
+  </label>
+	</div>
+    <p class="card-text">
+      <?php
+      echo substr($nota['testo'],0,100).'...';
+      ?>   
+      </p>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal<?php echo $nota['id']; ?>">
     Focus
    </button>
   </div>
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal<?php echo $nota['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel<?php echo $nota['id']; ?>" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+        <h5 class="modal-title" id="exampleModalLabel<?php echo $nota['id']; ?>">
+          <?php
+          echo $nota['titolo'];
+          ?>
+        
+      </h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        ...
+            <?php
+      echo $nota['testo'];
+      ?>   
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
       </div>
     </div>
   </div>
 </div>
+  <?php 
+}
+?>
+</div>
 
-<script type="text/javascript">
-	const myModal = document.getElementById('myModal')
-    const myInput = document.getElementById('myInput')
+<?php 
 
-myModal.addEventListener('shown.bs.modal', () => {
-  myInput.focus()
-})
+require 'configLog.php';
+$mysqli = new mysqli($db_host, $db_username, $db_password, $db_database);
+if ($mysqli->connect_error) {
+    exit('Errore di connessione ('.$mysqli->connect_errno.') '
+    .$mysqli->connect_error);
+
+}
+$query = "SELECT * FROM promemoria";
+$result = $mysqli->query($query);
+
+while($row = $result->fetch_assoc()) {
+    stampaNota($row);
+  }
+
+
+?>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script>
+  
 
 </script>
 </body>
