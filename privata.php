@@ -52,7 +52,7 @@ function stampaNota($nota){
       <?php
       echo substr($nota['testo'],0,100).'...';
       ?>   
-      </p>
+      </p> 
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal<?php echo $nota['id']; ?>">
     Focus
    </button>
@@ -77,12 +77,19 @@ function stampaNota($nota){
       <?php
       echo "<a href='checkComp.php?id=" . $nota['id'] . "'> $checkbox Completato</a>"
       ?>
-    </div>
+      </div>
         <?php
         echo $nota['testo'];
         ?>   
       </div>
       <div class="modal-footer">
+        <form method="post" 
+          <?php echo "action='updateProm.php?id=" . $nota['id'] . "'";?>>
+
+          <input type="text" name="titolo" value=<?php echo $nota['titolo'];?>>
+           <button type="submit" class="btn btn-primary" data-bs-target="#exampleModal<?php echo $nota['id']; ?>">Modifica
+           </button>
+        </form>
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
       </div>
     </div>
