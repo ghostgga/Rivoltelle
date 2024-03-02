@@ -15,6 +15,9 @@ if (!$_SESSION['autenticato'])
 <body>
 <h1>I miei promemoria</h1>
 <div>
+  <a href="index.php">Torna alla homepage</a>
+</div>
+<div>
   <a href="addProm.php">aggiungi promemoria</a>
 </div>
 
@@ -44,8 +47,20 @@ function stampaNota($nota){
       <?php
       echo "<a href='checkComp.php?id=" . $nota['id'] . "'> $checkbox Completato</a>"
       ?>
-
-  </label>
+    <div>
+      <h6>data creazione: 
+        <?php
+        echo $nota['dataCrea'];
+        ?>
+      </h6>
+    </div>
+    <div>
+      <h6>data Modifica
+        <?php
+        echo $nota['dataMod'];
+        ?>
+      </h6>
+    </div>
 	</div>
     <p class="card-text">
       <?php
@@ -90,6 +105,12 @@ function stampaNota($nota){
            <button type="submit" class="btn btn-primary" data-bs-target="#exampleModal<?php echo $nota['id']; ?>">Modifica
            </button>
         </form>
+        <form method="post" 
+          <?php echo "action='deleteProm.php?id=" . $nota['id'] . "'";?>>
+          <input type="hidden" name="id" value=<?php echo $nota['id'];?>>
+           <button type="submit" class="btn btn-primary" data-bs-target="#exampleModal<?php echo $nota['id']; ?>">Elimina
+           </button>
+        </form>
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
       </div>
     </div>
@@ -109,7 +130,9 @@ if ($mysqli->connect_error) {
     .$mysqli->connect_error);
 
 }
-$query = "SELECT * FROM promemoria";
+
+$idUtente = $_SESSION['IdUtente'];
+$query = "SELECT * FROM promemoria WHERE IdUtente=$idUtente";
 $result = $mysqli->query($query);
 
 while($row = $result->fetch_assoc()) {
