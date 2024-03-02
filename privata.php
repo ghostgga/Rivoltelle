@@ -41,11 +41,11 @@ function stampaNota($nota){
       ?>
 
     </h5>
-    <div class="form-check">
+    <div >
       <?php
-      echo "<a href='checkComp.php?id=" . $nota['id'] . "'> $checkbox </a>"
+      echo "<a href='checkComp.php?id=" . $nota['id'] . "'> $checkbox Completato</a>"
       ?>
-    Completato
+
   </label>
 	</div>
     <p class="card-text">
@@ -73,9 +73,14 @@ function stampaNota($nota){
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-            <?php
-      echo $nota['testo'];
-      ?>   
+      <div>
+      <?php
+      echo "<a href='checkComp.php?id=" . $nota['id'] . "'> $checkbox Completato</a>"
+      ?>
+    </div>
+        <?php
+        echo $nota['testo'];
+        ?>   
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
