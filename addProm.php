@@ -17,6 +17,11 @@
 	<input type="text" name="testo">
 	<input type="hidden" name="idutente" value=<?php echo $_SESSION['IdUtente'];?> >
 	</form>
+  <div>
+  <a href="privata.php">
+    <button type="button" class="btn btn-primary">Indietro</button>
+  </a>
+</div>
 	<button type="submit" form="addForm" value="Submit">Submit</button>
   </div>
 </body>

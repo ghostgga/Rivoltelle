@@ -8,6 +8,8 @@ if (!$_SESSION['autenticato'])
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>I miei promemoria</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 	<link rel="stylesheet" href="Privata.css">
@@ -15,10 +17,14 @@ if (!$_SESSION['autenticato'])
 <body>
 <h1>I miei promemoria</h1>
 <div>
-  <a href="index.php">Torna alla homepage</a>
+  <a href="index.php">
+    <button type="button" class="btn btn-primary">Torna alla homepage</button>
+  </a>
 </div>
 <div>
-  <a href="addProm.php">aggiungi promemoria</a>
+  <a href="addProm.php">
+    <button type="button" class="btn btn-primary">Aggiungi un promemoria</button>
+  </a>
 </div>
 
 <div class="allPromemoria">
@@ -48,7 +54,7 @@ function stampaNota($nota){
       echo "<a href='checkComp.php?id=" . $nota['id'] . "'> $checkbox Completato</a>"
       ?>
     <div>
-      <h6>data creazione: 
+      <h6>data Creazione: 
         <?php
         echo $nota['dataCrea'];
         ?>
@@ -81,17 +87,30 @@ function stampaNota($nota){
         <h5 class="modal-title" id="exampleModalLabel<?php echo $nota['id']; ?>">
           <?php
           echo $nota['titolo'];
-          ?>
-        
+          ?>       
       </h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body">       
       <div>
       <?php
       echo "<a href='checkComp.php?id=" . $nota['id'] . "'> $checkbox Completato</a>"
       ?>
       </div>
+      <div>
+      <h6>data Creazione: 
+        <?php
+        echo $nota['dataCrea'];
+        ?>
+      </h6>
+    </div>
+    <div>
+      <h6>data Modifica: 
+        <?php
+        echo $nota['dataMod'];
+        ?>
+      </h6>
+    </div>
         <?php
         echo $nota['testo'];
         ?>   
@@ -100,8 +119,8 @@ function stampaNota($nota){
         <form method="post" 
           <?php echo "action='updateProm.php?id=" . $nota['id'] . "'";?>>
           <input type="hidden" name="id" value=<?php echo $nota['id'];?>>
-          <input type="hidden" name="titolo" value=<?php echo $nota['titolo'];?>>
-          <input type="hidden" name="testo" value=<?php echo $nota['testo'];?>>
+          <input type="hidden" name="titolo" value='<?php echo $nota["titolo"];?>'>
+          <input type="hidden" name="testo" value='<?php echo $nota["testo"];?>'>
            <button type="submit" class="btn btn-primary" data-bs-target="#exampleModal<?php echo $nota['id']; ?>">Modifica
            </button>
         </form>
