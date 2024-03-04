@@ -1,6 +1,7 @@
 <?php session_start(); 
 $Id = $_POST['id'];
 $Titolo = $_POST['titolo'];
+$Priorita = $_POST['priorita'];
 $Testo = $_POST['testo'];
 
 ?>
@@ -18,9 +19,11 @@ $Testo = $_POST['testo'];
     <form action="checkUpProm.php" method="post" id="upForm">
   <label>Titolo</label>
   <input type="text" name="titolo" value='<?php echo $Titolo;?>'>
+  <label>Priorità</label>
+  <input type="text" name="priorita" value='<?php echo $Priorita;?>'>
   <label>Testo</label>
-  <input type="textarea"  style="height: 50%;"name="testo" value='<?php echo $Testo;?>'>
-  <input type="hidden" name="id" value=<?php echo $Id;?>>
+  <input type="text"  name="testo" value='<?php echo $Testo;?>'>
+  <input type="hidden" name="id" value='<?php echo $Id;?>'>
   </form>
   <a href="privata.php">
     <button type="button" form="back">Indietro</button>

@@ -61,9 +61,16 @@ function stampaNota($nota){
       </h6>
     </div>
     <div>
-      <h6>data Modifica
+      <h6>data Modifica:
         <?php
         echo $nota['dataMod'];
+        ?>
+      </h6>
+    </div>
+    <div>
+      <h6>Priorità:
+        <?php
+        echo $nota['priorita'];
         ?>
       </h6>
     </div>
@@ -111,6 +118,13 @@ function stampaNota($nota){
         ?>
       </h6>
     </div>
+    <div>
+      <h6>Priorità: 
+        <?php
+        echo $nota['priorita'];
+        ?>
+      </h6>
+    </div>
         <?php
         echo $nota['testo'];
         ?>   
@@ -118,15 +132,16 @@ function stampaNota($nota){
       <div class="modal-footer">
         <form method="post" 
           <?php echo "action='updateProm.php?id=" . $nota['id'] . "'";?>>
-          <input type="hidden" name="id" value=<?php echo $nota['id'];?>>
+          <input type="hidden" name="id" value='<?php echo $nota['id'];?>'>
           <input type="hidden" name="titolo" value='<?php echo $nota["titolo"];?>'>
+          <input type="hidden" name="priorita" value='<?php echo $nota["priorita"];?>'>
           <input type="hidden" name="testo" value='<?php echo $nota["testo"];?>'>
            <button type="submit" class="btn btn-primary" data-bs-target="#exampleModal<?php echo $nota['id']; ?>">Modifica
            </button>
         </form>
         <form method="post" 
           <?php echo "action='deleteProm.php?id=" . $nota['id'] . "'";?>>
-          <input type="hidden" name="id" value=<?php echo $nota['id'];?>>
+          <input type="hidden" name="id" value='<?php echo $nota['id'];?>'>
            <button type="submit" class="btn btn-primary" data-bs-target="#exampleModal<?php echo $nota['id']; ?>">Elimina
            </button>
         </form>
@@ -151,7 +166,7 @@ if ($mysqli->connect_error) {
 }
 
 $idUtente = $_SESSION['IdUtente'];
-$query = "SELECT * FROM promemoria WHERE IdUtente=$idUtente";
+$query = "SELECT * FROM promemoria WHERE IdUtente=$idUtente ORDER BY priorita DESC";
 $result = $mysqli->query($query);
 
 while($row = $result->fetch_assoc()) {

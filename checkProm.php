@@ -1,6 +1,7 @@
 <?php 
 session_start();
 $Titolo=$_POST['titolo'];
+$Priorita=$_POST['priorita'];
 $Testo=$_POST['testo'];
 $IdUtente=$_POST['idutente'];
 
@@ -15,8 +16,8 @@ $dataCrea = date("Y-m-d");
 $dataMod = date("Y-m-d");
 
 
-$query = "INSERT INTO promemoria (titolo, dataCrea, dataMod, checkComp, testo, IdUtente)
-VALUES ('$Titolo', '$dataCrea', '$dataMod', '0', '$Testo', '$IdUtente')";
+$query = "INSERT INTO promemoria (priorita, titolo, dataCrea, dataMod, checkComp, testo, IdUtente)
+	VALUES ('$Priorita', '$Titolo', '$dataCrea', '$dataMod', '0', '$Testo', '$IdUtente')";
 $mysqli->query($query);
 
 header('Location: privata.php');

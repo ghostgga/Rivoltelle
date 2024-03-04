@@ -13,6 +13,8 @@
     <form action="checkProm.php" method="post" id="addForm">
 	<label>Titolo</label>
 	<input type="text" name="titolo">
+  <label>Priorità</label>
+  <input type="number" name="priorita">
 	<label>Testo</label>
 	<input type="text" name="testo">
 	<input type="hidden" name="idutente" value=<?php echo $_SESSION['IdUtente'];?> >
