@@ -31,3 +31,21 @@ h1 {
   color: black;
 }
 
+.but {
+  overflow: hidden;
+  background-color: #000000;
+}
+
+.but a {
+  float: centre;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.but a:hover {
+  background-color: #626262;
+  color: black;
+}

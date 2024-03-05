@@ -1,9 +1,9 @@
 <?php session_start(); 
 $Id = $_POST['id'];
 $Titolo = $_POST['titolo'];
+$Priorita = $_POST['priorita'];
 $Testo = $_POST['testo'];
 
-echo $Testo;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,10 +18,12 @@ echo $Testo;
     <h1>Modifica promemoria <?php echo $Id;?></h1>
     <form action="checkUpProm.php" method="post" id="upForm">
   <label>Titolo</label>
-  <input type="text" name="titolo" value=<?php echo $Titolo;?>>
+  <input type="text" name="titolo" value='<?php echo $Titolo;?>'>
+  <label>Priorità</label>
+  <input type="text" name="priorita" value='<?php echo $Priorita;?>'>
   <label>Testo</label>
-  <input type="textarea"  name="testo" value=<?php echo $_POST['testo'];?>>
-  <input type="hidden" name="id" value=<?php echo $_POST['id'];?>>
+  <input type="text"  name="testo" value='<?php echo $Testo;?>'>
+  <input type="hidden" name="id" value='<?php echo $Id;?>'>
   </form>
   <a href="privata.php">
     <button type="button" form="back">Indietro</button>

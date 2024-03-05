@@ -1,6 +1,7 @@
 <?php
 session_start();
 $Titolo = $_POST['titolo'];
+$Priorita = $_POST['priorita'];
 $Testo = $_POST['testo'];
 $Id = $_POST['id'];
 
@@ -15,7 +16,7 @@ if ($mysqli->connect_error) {
 $IdUtente = $_SESSION['IdUtente'];
 $dataMod = date("Y-m-d");
 
-$query = "UPDATE promemoria SET titolo='$Titolo', testo='$Testo', dataMod='$dataMod' WHERE id=$Id";
+$query = "UPDATE promemoria SET titolo='$Titolo', priorita='$Priorita', testo='$Testo', dataMod='$dataMod' WHERE id=$Id";
 
 $mysqli->query($query);
 
